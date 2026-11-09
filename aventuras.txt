@@ -1,0 +1,25 @@
+
+
+Log de processos e problemas que encontrei ao longo do projeto
+
+_______ BANCO DE DADOS _________
+
+1 - Ao traduzir o agrupamento para sql, a ideia original era criar uma tabela nova para representar o agrupamento,
+mas, devido ao funcionamento da linguagem, isso eh, a obrigatoriedade de ter 3 chaves estrangeiras, a redundancia seria
+enorme, por fim, fica mais simples e claro adicionar a fk de criatura a tabela squad_missao, e gerenciara com triggers e funcoes 
+a insercao de novos valores.
+
+Tabela original: 
+
+CREATE TABLE capture_mission 
+    squad_mission_fk INT NOT NULL,
+    creature_id VARCHAR(30) NOT NULL,
+    PRIMARY KEY (squad_mission_fk, creature_id),
+
+    CONSTRAINT fk_squad_mission
+        FOREIGN KEY (squad_mission_fk)
+        REFERENCES squad_mission(squad_id, mission_id),
+
+2 - PKs personalizadas, ao construir as pks para as entidades, pensei em ter alguma coisa legal, tipo as letras que formar os SCPs, tipo
+'SCP-096', mas misturar letras com numero foi um inferno para manter a consistencia. Assim, todas as pks sao ints SERIAL, e as ckasses importantes contem 
+pelo menos um valor UNIQUE pelo o qual tambem pode ser identificado.
