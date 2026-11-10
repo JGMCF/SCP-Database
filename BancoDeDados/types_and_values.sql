@@ -19,7 +19,7 @@ CREATE TYPE creature_t AS ENUM ('physical', 'ephemeral');
 -- Classes de criatura, usado para agrupar e descrever risco, dentre outros fatores
 CREATE TYPE creature_class AS ENUM ('safe', 'euclid', 'keter', 'thaumiel', 'explained');
 
--- Posiveis possocpes que um agente de campo pode ter em um esquadrao
+-- Posiveis posicoes que um agente de campo pode ter em um esquadrao
 CREATE TYPE agent_role AS ENUM ('medic', 'marksman', 'comms_spec', 'pointman', 'scout', 'heavy_weapons', 'assault');
 
 
