@@ -1,6 +1,6 @@
 package com.example.demo.model.enums;
 
-public enum Creature_class {
+public enum CreatureClass {
     safe,
     euclid,
     keter,

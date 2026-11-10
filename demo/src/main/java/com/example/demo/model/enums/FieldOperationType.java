@@ -1,6 +1,6 @@
 package com.example.demo.model.enums;
 
-public enum Field_operation_t {
+public enum FieldOperationType {
     recon,
     combat,
     capture,

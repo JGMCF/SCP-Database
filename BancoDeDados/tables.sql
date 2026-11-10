@@ -20,7 +20,7 @@ CREATE TABLE research (
 
 CREATE TABLE squad (
     squad_id SERIAL PRIMARY KEY,
-    squad_code VARCHAR(30) UNIQUE,
+    squad_codename VARCHAR(30) UNIQUE,
     specialties field_operation_t[]
 );
 
@@ -30,9 +30,11 @@ CREATE TABLE mission (
     location_latitude DECIMAL(11,8),
     location_longitude DECIMAL(11,8),
     mission_status status_t NOT NULL,
-    total_casualties INT,
+    total_casualties INT DEFAULT 0,
     description VARCHAR(400)
 );
+
+-- #### --
 
 CREATE TABLE employee (
     employee_id SERIAL PRIMARY KEY,
@@ -79,7 +81,7 @@ CREATE TABLE research_manager (
 );
 
 CREATE TABLE site_manager (
-    employee_id INT PRIMARY KEY, -- Padronizado para employee_id
+    employee_id INT PRIMARY KEY,
     manages INT NOT NULL,
 
     CONSTRAINT fk_site_manager_manager 
@@ -93,7 +95,7 @@ CREATE TABLE site_manager (
 
 CREATE TABLE creature (
     creature_id SERIAL PRIMARY KEY,
-    creature_code VARCHAR(30) UNIQUE NOT NULL,
+    creature_codename VARCHAR(50) UNIQUE NOT NULL,
     contained_in INT,
     creature_type creature_t,
     aggressiveness_level INT,
@@ -136,7 +138,7 @@ CREATE TABLE agent (
 );
 
 CREATE TABLE commander (
-    employee_id INT PRIMARY KEY, -- Padronizado para employee_id
+    employee_id INT PRIMARY KEY, 
     commands INT NOT NULL,
 
     CONSTRAINT fk_commander_agent 

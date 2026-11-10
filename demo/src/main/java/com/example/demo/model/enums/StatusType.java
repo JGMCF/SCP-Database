@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 // representa o enum status_t no DB
 
 
-public enum Status_t {                                     
+public enum StatusType {                                     
     PLANNED("planned"),
     ON_GOING("on-going"),
     FAILURE("failure"),
@@ -17,7 +17,7 @@ public enum Status_t {
 
     private final String value;
 
-    Status_t(String value) {
+    StatusType(String value) {
         this.value = value;
     }
 

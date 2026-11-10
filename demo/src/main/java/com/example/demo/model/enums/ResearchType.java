@@ -2,7 +2,7 @@ package com.example.demo.model.enums;
 
 // Representa o enem research_t no DB
 
-public enum Research_t {
+public enum ResearchType {
     botanics,
     geology, 
     engineering,

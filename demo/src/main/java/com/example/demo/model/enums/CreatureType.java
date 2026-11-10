@@ -1,6 +1,6 @@
 package com.example.demo.model.enums;
 
-public enum Creature_t {
+public enum CreatureType {
     physical,
     ephemeral
 }
