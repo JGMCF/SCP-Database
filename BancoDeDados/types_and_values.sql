@@ -23,9 +23,3 @@ CREATE TYPE creature_class AS ENUM ('safe', 'euclid', 'keter', 'thaumiel', 'expl
 CREATE TYPE agent_role AS ENUM ('medic', 'marksman', 'comms_spec', 'pointman', 'scout', 'heavy_weapons', 'assault');
 
 
-
--- Definicao de sequencias para manutencao de chaves primarias
-
-CREATE SEQUENCE site_seq START 1 INCREMENT 1;
-CREATE SEQUENCE creature_seq START 2 INCREMENT 1;
-CREATE SEQUENCE squad_seq START 1 INCREMENT 1;
