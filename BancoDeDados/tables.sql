@@ -151,6 +151,8 @@ CREATE TABLE commander (
         REFERENCES squad(squad_id)
 );
 
+-- Tabelas relacionais
+
 CREATE TABLE team_conducts_research (
     team_id INT NOT NULL,
     research_id INT NOT NULL,
