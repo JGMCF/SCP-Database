@@ -10,7 +10,7 @@ public class Commander {
     @Column(name = "employee_id")
     private Long employeeId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "commands", nullable = false)
     private Squad commands;
 

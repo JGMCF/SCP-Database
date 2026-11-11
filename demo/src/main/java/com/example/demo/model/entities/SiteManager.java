@@ -10,7 +10,7 @@ public class SiteManager {
     @Column(name = "employee_id")
     private Long employeeId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "manages", nullable = false)
     private Site manages;
 

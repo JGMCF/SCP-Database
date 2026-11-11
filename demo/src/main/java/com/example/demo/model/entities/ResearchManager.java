@@ -10,7 +10,7 @@ public class ResearchManager {
     @Column(name = "employee_id")
     private Long employeeId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "leads", nullable = false)
     private ResearchTeam leads;
 
