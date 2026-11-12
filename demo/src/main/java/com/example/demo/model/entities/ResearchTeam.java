@@ -59,11 +59,11 @@ public class ResearchTeam {
         this.researchAffinities = researchAffinities;
     }
 
-    public Site getWorksAt() {
+    public Site setSiteId() {
         return siteId;
     }
 
-    public void setWorksAt(Site worksAt) {
+    public void setSiteId(Site worksAt) {
         this.siteId = siteId;
     }
 }
