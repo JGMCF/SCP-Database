@@ -3,44 +3,35 @@ package com.example.demo.model.entities;
 import com.example.demo.model.enums.AgentRole;
 import jakarta.persistence.*;
 import com.example.demo.model.entities.Squad;
+
 @Entity
 @Table(name = "agent")
-public class Agent {
-
-    @Id
-    @Column(name = "employee_id")
-    private Long employeeId;
+@PrimaryKeyJoinColumn(name = "employee_id")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Agent extends Employee {
 
     @ManyToOne
     @JoinColumn(name = "member_of", nullable = false)
-    private Squad memberOf;
+    protected Squad memberOf;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "squad_role", nullable = false, columnDefinition = "agent_role")
-    private AgentRole squadRole;
+    protected AgentRole squadRole;
 
     public Agent() {}
 
-    public Agent(Long employeeId, Squad memberOf, AgentRole squadRole) {
-        this.employeeId = employeeId;
+    public Agent(String cpf, Site worksAt, String firstName, String lastName, int salary, Squad memberOf, AgentRole squadRole) {
+        super(cpf, worksAt, firstName, lastName, salary);
         this.memberOf = memberOf;
         this.squadRole = squadRole;
-    }
-
-    public Long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
     }
 
     public Squad getMemberOf() {
         return memberOf;
     }
 
-    public void setMemberOf(Squad memberOf) {
-        this.memberOf = memberOf;
+    public void setMemberOf(Squad squad) {
+        this.memberOf = squad;
     }
 
     public AgentRole getSquadRole() {

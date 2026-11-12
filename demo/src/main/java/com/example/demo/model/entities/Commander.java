@@ -4,29 +4,18 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "commander")
-public class Commander {
-
-    @Id
-    @Column(name = "employee_id")
-    private Long employeeId;
+@PrimaryKeyJoinColumn(name = "employee_id")
+public class Commander extends Agent {
 
     @OneToOne
     @JoinColumn(name = "commands", nullable = false)
     private Squad commands;
 
-    public Commander() {}
+   public Commander() {}
 
-    public Commander(Long employeeId, Squad commands) {
-        this.employeeId = employeeId;
+   public Commander(String cpf, Site worksAt, String firstName, String lastName, int salary, Squad memberOf, AgentRole squadRole, Squad commands) {
+        super(cpf, worksAt, firstName, lastName, salary, memberOf, squadRole);
         this.commands = commands;
-    }
-
-    public Long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
     }
 
     public Squad getCommands() {

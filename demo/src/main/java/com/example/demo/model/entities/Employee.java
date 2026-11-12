@@ -7,32 +7,33 @@ import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "employee")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
-    private Long employeeId;
+    protected Long employeeId;
 
     @Pattern(regexp = "^[0-9]{11}$")
     @Column(name = "cpf", length = 11, unique = true, nullable = false)
-    private String cpf;
+    protected String cpf;
 
     @ManyToOne
     @JoinColumn(name = "works_at", nullable = false)
-    private Site worksAt;
+    protected Site worksAt;
 
     @Column(name = "first_name", length = 50, nullable = false)
-    private String firstName;
+    protected String firstName;
 
     @Column(name = "last_name", length = 100, nullable = false)
-    private String lastName;
+    protected String lastName;
 
     @Column(name = "salary", nullable = false)
-    private int salary;
+    protected int salary;
 
     @Column(name = "admission_date")
-    private LocalDateTime admissionDate = LocalDateTime.now();
+    protected LocalDateTime admissionDate = LocalDateTime.now();
 
     public Employee() {}
 
