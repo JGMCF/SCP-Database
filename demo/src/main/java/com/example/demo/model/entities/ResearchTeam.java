@@ -26,7 +26,7 @@ public class ResearchTeam {
 
     @ManyToOne
     @JoinColumn(name = "site_id", nullable = false) 
-    private Site worksAt;
+    private Site siteId;
 
     public ResearchTeam() {}
 
@@ -60,11 +60,11 @@ public class ResearchTeam {
     }
 
     public Site getWorksAt() {
-        return worksAt;
+        return siteId;
     }
 
     public void setWorksAt(Site worksAt) {
-        this.worksAt = worksAt;
+        this.siteId = siteId;
     }
 }
 
