@@ -4,12 +4,6 @@ CREATE TABLE site (
     longitude DECIMAL(11,8) NOT NULL
 );
 
-CREATE TABLE research_team (
-    team_id SERIAL PRIMARY KEY,
-    competence_level INT,
-    research_affinities research_t[]
-);
-
 CREATE TABLE research (
     research_id SERIAL PRIMARY KEY,
     research_state status_t NOT NULL,
@@ -35,6 +29,8 @@ CREATE TABLE mission (
 );
 
 -- #### --
+
+
 
 CREATE TABLE employee (
     employee_id SERIAL PRIMARY KEY,
@@ -65,6 +61,20 @@ CREATE TABLE researcher (
     CONSTRAINT fk_researcher_team 
         FOREIGN KEY (member_of) 
         REFERENCES research_team(team_id)
+);
+
+
+
+CREATE TABLE research_team (
+    team_id SERIAL PRIMARY KEY,
+    site_id INT NOT NULL,
+    competence_level INT,
+    research_affinities research_t[],
+
+    CONSTRAINT team_site
+        FOREIGN KEY (site_id)
+        REFERENCES site(site_id)
+
 );
 
 CREATE TABLE research_manager (
