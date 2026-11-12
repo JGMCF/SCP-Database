@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AgentRepository extends JpaRepository<Agent, Long> {
+
+    @Modifying
+    @Query(value = "INSERT INTO agent (employee_id, member_of, squad_role) VALUES (:employeeId, :squadId, :squadRole)", nativeQuery = true)
+    void insertSubtype(@Param("employeeId") Long employeeId, @Param("squadId") Long squadId, @Param("squadRole") String squadRole);
 }

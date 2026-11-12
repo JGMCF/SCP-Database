@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SiteManagerRepository extends JpaRepository<SiteManager, Long> {
+
+    @Modifying
+    @Query(value = "INSERT INTO site_manager (employee_id, manages) VALUES (:employeeId, :siteId)", nativeQuery = true)
+    void insertSubtype(@Param("employeeId") Long employeeId, @Param("siteId") Long valueId);
 }

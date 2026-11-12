@@ -6,4 +6,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ResearchManagerRepository extends JpaRepository<ResearchManager, Long> {
+    
+        Optional<ResearchManager> findByLeads(Long researchTeamId);
+
+        @Modifying
+        @Query(value = "INSERT INTO research_manager (employee_id, leads) VALUES (:employeeId, :teamId)", nativeQuery = true)
+        void insertSubtype(@Param("employeeId") Long employeeId, @Param("teamId") Long valueId);
+
 }
