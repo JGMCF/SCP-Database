@@ -59,7 +59,7 @@ public class ResearchTeam {
         this.researchAffinities = researchAffinities;
     }
 
-    public Site setSiteId() {
+    public Site getSiteId() {
         return siteId;
     }
 
