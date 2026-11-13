@@ -1,9 +1,9 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.entities.SquadMission;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.example.demo.model.entities.SquadMissionId;
 
-@Repository
-public interface SquadMissionRepository extends JpaRepository<SquadMission, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SquadMissionRepository extends JpaRepository<SquadMission, SquadMissionId> {
 }

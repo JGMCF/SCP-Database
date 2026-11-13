@@ -2,9 +2,13 @@ package com.example.demo.repository;
 
 import com.example.demo.model.entities.ResearchManager;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
+
 public interface ResearchManagerRepository extends JpaRepository<ResearchManager, Long> {
     
         Optional<ResearchManager> findByLeads(Long researchTeamId);

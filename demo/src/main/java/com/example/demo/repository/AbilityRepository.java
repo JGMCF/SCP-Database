@@ -1,9 +1,9 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.entities.Ability;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.example.demo.model.entities.AbilityId;
 
-@Repository
-public interface AbilityRepository extends JpaRepository<Ability, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AbilityRepository extends JpaRepository<Ability, AbilityId> {
 }
