@@ -2,10 +2,11 @@ package com.example.demo.model.entities;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "commander")
 @PrimaryKeyJoinColumn(name = "employee_id")
-public class Commander extends Agent {
+public class Commander extends Employee {
 
     @OneToOne
     @JoinColumn(name = "commands", nullable = false)
@@ -13,8 +14,8 @@ public class Commander extends Agent {
 
    public Commander() {}
 
-   public Commander(String cpf, Site worksAt, String firstName, String lastName, int salary, Squad memberOf, AgentRole squadRole, Squad commands) {
-        super(cpf, worksAt, firstName, lastName, salary, memberOf, squadRole);
+   public Commander(String cpf, Site worksAt, String firstName, String lastName, int salary, Squad commands) {
+        super(cpf, worksAt, firstName, lastName, salary);
         this.commands = commands;
     }
 

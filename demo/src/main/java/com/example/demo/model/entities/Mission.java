@@ -33,10 +33,8 @@ public class Mission {
     @Column(name = "description", length = 400)
     private String description;
 
-    // Construtor vazio obrigatório pelo JPA
     public Mission() {}
 
-    // Construtor com parâmetros úteis
     public Mission(LocalDate missionDate, BigDecimal locationLatitude, BigDecimal locationLongitude, StatusType missionStatus, int totalCasualties, String description) {
         this.missionDate = missionDate;
         this.locationLatitude = locationLatitude;
@@ -46,7 +44,6 @@ public class Mission {
         this.description = description;
     }
 
-    // Getters e Setters
     public Long getMissionId() {
         return missionId;
     }

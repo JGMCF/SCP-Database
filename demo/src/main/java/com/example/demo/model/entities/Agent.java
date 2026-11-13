@@ -2,7 +2,6 @@ package com.example.demo.model.entities;
 
 import com.example.demo.model.enums.AgentRole;
 import jakarta.persistence.*;
-import com.example.demo.model.entities.Squad;
 
 @Entity
 @Table(name = "agent")

@@ -64,7 +64,7 @@ public class ResearchTeam {
     }
 
     public void setSiteId(Site worksAt) {
-        this.siteId = siteId;
+        this.siteId = worksAt;
     }
 }
 
