@@ -24,15 +24,15 @@ public class ResearchTeam {
     @Column(name = "research_affinities", columnDefinition = "research_t[]")
     private List<ResearchType> researchAffinities;
 
-    @ManyToOne
-    @JoinColumn(name = "site_id", nullable = false) 
-    private Site siteId;
+    @Column(name = "site_id", nullable = false) 
+    private Long siteId;
 
     public ResearchTeam() {}
 
-    public ResearchTeam(Long competenceLevel, List<ResearchType> researchAffinities) {
+    public ResearchTeam(Long competenceLevel, List<ResearchType> researchAffinities, Long siteId) {
         this.competenceLevel = competenceLevel;
         this.researchAffinities = researchAffinities;
+        this.siteId = siteId;
     }
 
     public Long getTeamId() {
@@ -59,13 +59,11 @@ public class ResearchTeam {
         this.researchAffinities = researchAffinities;
     }
 
-    public Site getSiteId() {
+    public Long getSiteId() {
         return siteId;
     }
 
-    public void setSiteId(Site worksAt) {
-        this.siteId = worksAt;
+    public void setSiteId(Long siteId) {
+        this.siteId = siteId;
     }
 }
-
-

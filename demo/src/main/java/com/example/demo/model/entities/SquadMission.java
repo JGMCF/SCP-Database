@@ -4,74 +4,56 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "squad_mission")
-@IdClass(SquadMissionId.class)
 public class SquadMission {
 
-    @Id
-    @Column(name = "squad_id")
-    private Long squadId;
+    @EmbeddedId
+    private SquadMissionId id = new SquadMissionId();
 
-    @Id
-    @Column(name = "mission_id")
-    private Long missionId;
-
-    @ManyToOne
-    @JoinColumn(name = "squad_id", insertable = false, updatable = false, nullable = false)
-    private Squad squad;
-
-    @ManyToOne
-    @JoinColumn(name = "mission_id", insertable = false, updatable = false, nullable = false)
-    private Mission mission;
-
-    @ManyToOne
-    @JoinColumn(name = "creature_id", nullable = true)
-    private Creature creature;
+    @Column(name = "creature_id", nullable = true)
+    private Long creature;
 
     public SquadMission() {}
 
-    public SquadMission(Long squadId, Long missionId, Creature creature) {
-        this.squadId = squadId;
-        this.missionId = missionId;
+    public SquadMission(Long squadId, Long missionId, Long creature) {
+        this.id = new SquadMissionId(squadId, missionId);
         this.creature = creature;
     }
 
+    public SquadMissionId getId() {
+        return id;
+    }
+
+    public void setId(SquadMissionId id) {
+        this.id = id;
+    }
+
     public Long getSquadId() {
-        return squadId;
+        return id != null ? id.getSquadId() : null;
     }
 
     public void setSquadId(Long squadId) {
-        this.squadId = squadId;
+        if (this.id == null) {
+            this.id = new SquadMissionId();
+        }
+        this.id.setSquadId(squadId);
     }
 
     public Long getMissionId() {
-        return missionId;
+        return id != null ? id.getMissionId() : null;
     }
 
     public void setMissionId(Long missionId) {
-        this.missionId = missionId;
+        if (this.id == null) {
+            this.id = new SquadMissionId();
+        }
+        this.id.setMissionId(missionId);
     }
 
-    public Squad getSquad() {
-        return squad;
-    }
-
-    public void setSquad(Squad squad) {
-        this.squad = squad;
-    }
-
-    public Mission getMission() {
-        return mission;
-    }
-
-    public void setMission(Mission mission) {
-        this.mission = mission;
-    }
-
-    public Creature getCreature() {
+    public Long getCreature() {
         return creature;
     }
 
-    public void setCreature(Creature creature) {
+    public void setCreature(Long creature) {
         this.creature = creature;
     }
 }

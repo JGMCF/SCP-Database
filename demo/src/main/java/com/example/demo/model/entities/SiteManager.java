@@ -5,24 +5,23 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "site_manager")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class SiteManager extends Employee{
+public class SiteManager extends Employee {
 
-    @OneToOne
-    @JoinColumn(name = "manages", nullable = false)
-    private Site manages;
+    @Column(name = "manages", nullable = false)
+    private Long manages;
 
     public SiteManager() {}
 
-    public SiteManager(String cpf, Site worksAt, String firstName, String lastName, int salary, Site manages) {
+    public SiteManager(String cpf, Long worksAt, String firstName, String lastName, int salary, Long manages) {
         super(cpf, worksAt, firstName, lastName, salary);
         this.manages = manages;
     }
 
-    public Site getManages() {
+    public Long getManages() {
         return manages;
     }
 
-    public void setManages(Site manages) {
+    public void setManages(Long manages) {
         this.manages = manages;
     }
 }

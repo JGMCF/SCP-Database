@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.model.entities.Agent;
-import com.example.demo.model.entities.Squad;
 
 import com.example.demo.repository.AgentRepository;
 import com.example.demo.repository.SquadRepository;
@@ -17,11 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class AgentService extends BaseService<Agent, Long> {
 
     private final AgentRepository agentRepository;
-    private final SquadRepository squadRepository;
 
     public AgentService(AgentRepository agentRepository, SquadRepository squadRepository) {
         this.agentRepository = agentRepository;
-        this.squadRepository = squadRepository;
     }
 
     @Override
@@ -30,10 +27,18 @@ public class AgentService extends BaseService<Agent, Long> {
     }
 
     @Transactional
-    public void changeRole(Long agentId, AgentRole role) {
+    public Agent findAgent(Long agentId) {
 
         Agent agent = agentRepository.findById(agentId)
             .orElseThrow(() -> new RuntimeException("Agente nao encontrado"));
+
+        return agent;
+    }
+
+    @Transactional
+    public void changeRole(Long agentId, AgentRole role) {
+
+        Agent agent = findAgent(agentId);
 
         agent.setSquadRole(role);
         agentRepository.save(agent);
@@ -42,13 +47,9 @@ public class AgentService extends BaseService<Agent, Long> {
     @Transactional 
     public void changeSquad(Long agentId, Long squadId) {
 
-        Agent agent = agentRepository.findById(agentId)
-            .orElseThrow(() -> new RuntimeException("Agente nao encontrado"));
-        
-        Squad squad = squadRepository.findById(squadId)
-            .orElseThrow(() -> new RuntimeException("Squad nao encontrado"));
+        Agent agent = findAgent(agentId);
 
-        agent.setMemberOf(squad);
+        agent.setMemberOf(squadId);
         agentRepository.save(agent);
         
     }

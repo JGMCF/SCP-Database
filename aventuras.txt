@@ -23,3 +23,15 @@ CREATE TABLE capture_mission
 2 - PKs personalizadas, ao construir as pks para as entidades, pensei em ter alguma coisa legal, tipo as letras que formar os SCPs, tipo
 'SCP-096', mas misturar letras com numero foi um inferno para manter a consistencia. Assim, todas as pks sao ints SERIAL, e as ckasses importantes contem 
 pelo menos um valor UNIQUE pelo o qual tambem pode ser identificado.
+
+3 - Atomicidade das regras de negocio. Ao definir o service para o agente, pensei em criar varias funcoes de promocao, como promover o agente para commandante 
+de outro esquadrao, promover o agente como commandante do mesmo esquadrao, etc. Percebi depois de um tempo que, o agente era promovido e adiccionado a um esquadrao,
+mas essa adicao deveria acontecer no service do commandante. Assim, refatorei algums services para que contenham apenas operacoes atomicas, isso eh, agora o agente,
+apenas eh promovido, e o commandante eh adicionado/removido de um esquadrao. De forma similar, mesmo que um gestor nao lidere um time e possa mudar de site, a melhor.
+opcao eh jogar um erro caso tente mudar a sua lideracao do time atual para um time que esta em outro site, garantindo que ele deva ser transferido atravez da funcao 
+correta primeiro.
+
+4 - Herancas desnecessarias, na modelagem original do banco de dados, parecia que essas herancas de terceiro nivel funcionariam, mas, apos o ORM, elas nao funcionaram,
+KISS. Isso simplificou muitos problemas de desgin, como a mudanca de esquadrao de um commandante e de um agente
+
+funny story: os erros do java nao estavam aparecendo, eu fui so codando e codando tranquilo e quando eu fui arruumar, bam, mais de 100 erros pra consertar

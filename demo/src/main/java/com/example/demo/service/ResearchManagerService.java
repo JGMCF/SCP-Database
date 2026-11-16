@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.model.entities.ResearchManager;
-import com.example.demo.model.entities.Site;
 import com.example.demo.model.entities.ResearchTeam;
 
 import com.example.demo.repository.ResearchManagerRepository;
@@ -17,14 +16,12 @@ public class ResearchManagerService extends BaseService<ResearchManager, Long> {
 
     private final ResearchManagerRepository researchManagerRepository;
     private final ResearchTeamRepository researchTeamRepository;
-    private final SiteRepository siteRepository;
 
     public ResearchManagerService(ResearchManagerRepository researchManagerRepository, 
         ResearchTeamRepository researchTeamRepository, SiteRepository siteRepository) {
             
         this.researchManagerRepository = researchManagerRepository;
         this.researchTeamRepository = researchTeamRepository;
-        this.siteRepository = siteRepository;
     }
     
     @Override
@@ -32,14 +29,19 @@ public class ResearchManagerService extends BaseService<ResearchManager, Long> {
         return researchManagerRepository;
     }
 
-    @Transactional
-    public void changeSite(Long managerId, Long siteId) {
+     @Transactional
+    public ResearchManager findResearchManager(Long managerId) {
 
         ResearchManager manager = researchManagerRepository.findById(managerId)
             .orElseThrow(() -> new RuntimeException("Gestor de pesquisa nao encontrado"));
 
-        Site newSite = siteRepository.findById(siteId)
-            .orElseThrow(() -> new RuntimeException("Site nao encontrado"));
+        return manager;
+    }
+
+    @Transactional
+    public void changeSite(Long managerId, Long siteId) {
+
+        ResearchManager manager = findResearchManager(managerId);
 
         boolean hasTeam = manager.getLeads() != null;
 
@@ -47,20 +49,19 @@ public class ResearchManagerService extends BaseService<ResearchManager, Long> {
             throw new RuntimeException("Esse gestor lidera um time e nao pode mudar de site");
         }
         
-        manager.setWorksAt(newSite);
+        manager.setWorksAt(siteId);
         researchManagerRepository.save(manager);
     }
 
     @Transactional
     public void assignTeamLeadership(Long managerId, Long teamId){
 
-        ResearchManager manager = researchManagerRepository.findById(managerId)
-            .orElseThrow(() -> new RuntimeException("Gestor de pesquisa nao encontrado"));
+        ResearchManager manager = findResearchManager(managerId);
 
         ResearchTeam team = researchTeamRepository.findById(teamId)
             .orElseThrow(() -> new RuntimeException("Time nao encontrado"));
 
-        Site currentSite = manager.getWorksAt();
+        Long currentSite = manager.getWorksAt();
 
         if(manager.getLeads() != null){
             throw new RuntimeException("Esse gestor ja lidera um time");
@@ -68,11 +69,11 @@ public class ResearchManagerService extends BaseService<ResearchManager, Long> {
         else if(researchManagerRepository.findByLeads(teamId).isPresent()){
             throw new RuntimeException("Esse time ja tem um gestor");
         }
-        else if(!currentSite.getSiteId().equals(team.getSiteId().getSiteId())){
+        else if(!currentSite.equals(team.getSiteId())){
             throw new RuntimeException("Esse time se encontra em outro site, transfira o gerente primeiro");
         }
         else {
-            manager.setLeads(team);
+            manager.setLeads(teamId);
             researchManagerRepository.save(manager);
         }
     }
@@ -80,8 +81,7 @@ public class ResearchManagerService extends BaseService<ResearchManager, Long> {
     @Transactional
     public void removeTeamLeadership(Long managerId){
 
-        ResearchManager manager = researchManagerRepository.findById(managerId)
-            .orElseThrow(() -> new RuntimeException("Gestor de pesquisa nao encontrado"));
+        ResearchManager manager = findResearchManager(managerId);
 
         if(manager.getLeads() == null){
             throw new RuntimeException("Esse gestor nao lidera um time");

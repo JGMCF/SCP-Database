@@ -9,11 +9,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "researcher")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Researcher extends Employee{
+public class Researcher extends Employee {
 
-    @ManyToOne
-    @JoinColumn(name = "member_of", nullable = false)
-    private ResearchTeam memberOf;
+    @Column(name = "member_of", nullable = false)
+    private Long memberOf;
 
     @Type(ListArrayType.class)
     @Column(name = "specialty", columnDefinition = "research_t[]")
@@ -21,17 +20,18 @@ public class Researcher extends Employee{
 
     public Researcher() {}
 
-    public Researcher(String cpf, Site worksAt, String firstName, String lastName, int salary, ResearchTeam memberOf, List<ResearchType> specialty) {
+    public Researcher(String cpf, Long worksAt, String firstName, String lastName, int salary, Long memberOf, List<ResearchType> specialty) {
         super(cpf, worksAt, firstName, lastName, salary); 
         this.memberOf = memberOf;
         this.specialty = specialty;
-}
-     public ResearchTeam getMemberOf() {
+    }
+
+    public Long getMemberOf() {
         return memberOf;
     }
 
-    public void setMemberOf(ResearchTeam team) {
-        this.memberOf = team;
+    public void setMemberOf(Long memberOf) {
+        this.memberOf = memberOf;
     }
 
     public List<ResearchType> getSpecialty() {

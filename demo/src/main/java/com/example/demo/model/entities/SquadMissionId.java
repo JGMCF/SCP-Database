@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class SquadMissionId implements Serializable {
+    
     private Long squadId;
     private Long missionId;
 

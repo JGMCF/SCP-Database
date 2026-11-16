@@ -5,24 +5,23 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "research_manager")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class ResearchManager extends Employee{
+public class ResearchManager extends Employee {
 
-    @OneToOne
-    @JoinColumn(name = "leads", nullable = false)
-    protected ResearchTeam leads;
+    @Column(name = "leads", nullable = false)
+    protected Long leads;
 
     public ResearchManager() {}
 
-    public ResearchManager(String cpf, Site worksAt, String firstName, String lastName, int salary, ResearchTeam leads) {
+    public ResearchManager(String cpf, Long worksAt, String firstName, String lastName, int salary, Long leads) {
         super(cpf, worksAt, firstName, lastName, salary);
         this.leads = leads;
     }
 
-    public ResearchTeam getLeads() {
+    public Long getLeads() {
         return leads;
     }
 
-    public void setLeads(ResearchTeam leads) {
+    public void setLeads(Long leads) {
         this.leads = leads;
     }
 }

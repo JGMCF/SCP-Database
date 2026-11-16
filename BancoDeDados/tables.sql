@@ -1,5 +1,6 @@
 CREATE TABLE site (
     site_id SERIAL PRIMARY KEY,
+    site_codename VARCHAR(30) UNIQUE,
     latitude DECIMAL(11,8) NOT NULL,
     longitude DECIMAL(11,8) NOT NULL
 );
@@ -106,6 +107,7 @@ CREATE TABLE site_manager (
 CREATE TABLE creature (
     creature_id SERIAL PRIMARY KEY,
     creature_codename VARCHAR(50) UNIQUE NOT NULL,
+    number_code INT UNIQUE NOT NULL,
     contained_in INT,
     creature_type creature_t,
     aggressiveness_level INT,
@@ -208,4 +210,18 @@ CREATE TABLE squad_mission (
     CONSTRAINT fk_creature 
         FOREIGN KEY (creature_id)
         REFERENCES creature(creature_id)
+);
+
+CREATE TABLE creature_abiility (
+    creature_id INT NOT NULL,
+    ability_id INT NOT NULL,
+    PRIMARY KEY (creature_id, ability_id),
+
+    CONSTRAINT creature
+        FOREIGN KEY (creature_id)
+        REFERENCES creature(creature_id),
+    
+    CONSTRAINT ability
+        FOREIGN KEY (ability_id)
+        REFERENCES ability(ability_id)
 );

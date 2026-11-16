@@ -1,4 +1,3 @@
-
 package com.example.demo.model.entities;
 
 import java.util.List;
@@ -55,4 +54,4 @@ public class Squad {
     public void setSpecialties(List<FieldOperationType> specialties) {
         this.specialties = specialties;
     }
-} 
+}

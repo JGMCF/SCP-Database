@@ -9,9 +9,8 @@ import jakarta.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Agent extends Employee {
 
-    @ManyToOne
-    @JoinColumn(name = "member_of", nullable = false)
-    protected Squad memberOf;
+    @Column(name = "member_of", nullable = false)
+    protected Long memberOf;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "squad_role", nullable = false, columnDefinition = "agent_role")
@@ -19,18 +18,18 @@ public class Agent extends Employee {
 
     public Agent() {}
 
-    public Agent(String cpf, Site worksAt, String firstName, String lastName, int salary, Squad memberOf, AgentRole squadRole) {
+    public Agent(String cpf, Long worksAt, String firstName, String lastName, int salary, Long memberOf, AgentRole squadRole) {
         super(cpf, worksAt, firstName, lastName, salary);
         this.memberOf = memberOf;
         this.squadRole = squadRole;
     }
 
-    public Squad getMemberOf() {
+    public Long getMemberOf() {
         return memberOf;
     }
 
-    public void setMemberOf(Squad squad) {
-        this.memberOf = squad;
+    public void setMemberOf(Long memberOf) {
+        this.memberOf = memberOf;
     }
 
     public AgentRole getSquadRole() {

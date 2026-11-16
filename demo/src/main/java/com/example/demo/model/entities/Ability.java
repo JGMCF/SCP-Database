@@ -16,10 +16,6 @@ public class Ability {
     @Column(name = "ability_id")
     private Long abilityId;
 
-    @ManyToOne
-    @JoinColumn(name = "creature_id", insertable = false, updatable = false, nullable = false)
-    private Creature creature;
-
     @Column(name = "name", length = 20, nullable = false)
     private String name;
 
@@ -58,14 +54,6 @@ public class Ability {
 
     public void setAbilityId(Long abilityId) {
         this.abilityId = abilityId;
-    }
-
-    public Creature getCreature() {
-        return creature;
-    }
-
-    public void setCreature(Creature creature) {
-        this.creature = creature;
     }
 
     public String getName() {

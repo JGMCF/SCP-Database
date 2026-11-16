@@ -13,7 +13,7 @@ public class Research {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "research_id")
-    private long researchID;
+    private Long researchId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "research_type")
@@ -38,12 +38,12 @@ public class Research {
         this.cost = cost;
     }
 
-    public long getResearchID() {
-        return researchID;
+    public long getResearchId() {
+        return researchId;
     }
 
-    public void setResearchID(long researchID) {
-        this.researchID = researchID;
+    public void setResearchId(long researchID) {
+        this.researchId = researchID;
     }
 
     public ResearchType getResearchType() {
@@ -78,4 +78,3 @@ public class Research {
         this.cost = cost;
     }
 }
-

@@ -12,16 +12,28 @@ public class Site {
     @Column(name = "site_id")
     private Long siteId;
 
-    @Column(nullable = false, precision = 11, scale = 8)
+    @Column(name = "site_codename", length = 30)
+    private String siteCodename;
+
+    @Column(name = "latitude", nullable = false, precision = 11, scale = 8)
     private BigDecimal latitude;
 
-    @Column(nullable = false, precision = 11, scale = 8)
+    @Column(name = "longitude", nullable = false, precision = 11, scale = 8)
     private BigDecimal longitude;
 
     public Site() {}
+
     public Site(BigDecimal latitude, BigDecimal longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public String getSiteCodename() {
+        return siteCodename;
+    }
+
+    public void setSiteCodename(String siteCodename) {
+        this.siteCodename = siteCodename;
     }
 
     public Long getSiteId() {

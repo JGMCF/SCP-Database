@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 
-
 @Entity
 @Table(name = "employee")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -19,9 +18,8 @@ public class Employee {
     @Column(name = "cpf", length = 11, unique = true, nullable = false)
     protected String cpf;
 
-    @ManyToOne
-    @JoinColumn(name = "works_at", nullable = false)
-    protected Site worksAt;
+    @Column(name = "works_at", nullable = false)
+    protected Long worksAt;
 
     @Column(name = "first_name", length = 50, nullable = false)
     protected String firstName;
@@ -37,7 +35,7 @@ public class Employee {
 
     public Employee() {}
 
-    public Employee(String cpf, Site worksAt, String firstName, String lastName, int salary) {
+    public Employee(String cpf, Long worksAt, String firstName, String lastName, int salary) {
         this.cpf = cpf;
         this.worksAt = worksAt;
         this.firstName = firstName;
@@ -61,11 +59,11 @@ public class Employee {
         this.cpf = cpf;
     }
 
-    public Site getWorksAt() {
+    public Long getWorksAt() {
         return worksAt;
     }
 
-    public void setWorksAt(Site worksAt) {
+    public void setWorksAt(Long worksAt) {
         this.worksAt = worksAt;
     }
 

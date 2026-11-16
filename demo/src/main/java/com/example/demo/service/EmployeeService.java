@@ -3,7 +3,6 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.model.entities.Employee;
-import com.example.demo.model.entities.Site;
 
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.ResearcherRepository;
@@ -29,7 +28,6 @@ public class EmployeeService extends BaseService<Employee, Long> {
     private final SiteManagerRepository siteManagerRepository;
     private final AgentRepository agentRepository;
     private final CommanderRepository commanderRepository;
-    private final SiteRepository siteRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository, ResearcherRepository researcherRepository, 
         ResearchManagerRepository researchManagerRepository, SiteManagerRepository siteManagerRepository, 
@@ -41,7 +39,6 @@ public class EmployeeService extends BaseService<Employee, Long> {
         this.siteManagerRepository = siteManagerRepository;
         this.agentRepository = agentRepository;
         this.commanderRepository = commanderRepository;
-        this.siteRepository = siteRepository;
     }
 
     @Override
@@ -65,10 +62,7 @@ public class EmployeeService extends BaseService<Employee, Long> {
         Employee employee = employeeRepository.findById(employeeId)
             .orElseThrow(() -> new RuntimeException("Funcionario nao encontrado"));
 
-        Site site = siteRepository.findById(siteId)
-            .orElseThrow(() -> new RuntimeException("Site nao encontrado"));
-
-        employee.setWorksAt(site);
+        employee.setWorksAt(siteId);
         employeeRepository.save(employee);
     }
 
@@ -81,6 +75,42 @@ public class EmployeeService extends BaseService<Employee, Long> {
             .orElseThrow(() -> new RuntimeException("Funcionario nao encontrado"));
 
         employee.setSalary(newSalary);
+        employeeRepository.save(employee); 
+    }
+
+     @Transactional
+    public void changeFirstName(Long employeeId, String firstName) {
+        
+        employeeExists(employeeId);
+
+        Employee employee = employeeRepository.findById(employeeId)
+            .orElseThrow(() -> new RuntimeException("Funcionario nao encontrado"));
+
+        employee.setFirstName(firstName);
+        employeeRepository.save(employee); 
+    }
+
+     @Transactional
+    public void changeLastName(Long employeeId, String lastName) {
+        
+        employeeExists(employeeId);
+
+        Employee employee = employeeRepository.findById(employeeId)
+            .orElseThrow(() -> new RuntimeException("Funcionario nao encontrado"));
+
+        employee.setLastName(lastName);
+        employeeRepository.save(employee); 
+    }
+
+    @Transactional
+    public void changeCpf(Long employeeId, String cpf) {
+        
+        employeeExists(employeeId);
+
+        Employee employee = employeeRepository.findById(employeeId)
+            .orElseThrow(() -> new RuntimeException("Funcionario nao encontrado"));
+
+        employee.setCpf(cpf);
         employeeRepository.save(employee); 
     }
 

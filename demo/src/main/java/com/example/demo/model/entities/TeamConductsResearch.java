@@ -15,14 +15,6 @@ public class TeamConductsResearch {
     @Column(name = "research_id")
     private Long researchId;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id", insertable = false, updatable = false, nullable = false)
-    private ResearchTeam team;
-
-    @ManyToOne
-    @JoinColumn(name = "research_id", insertable = false, updatable = false, nullable = false)
-    private Research research;
-
     public TeamConductsResearch() {}
 
     public TeamConductsResearch(Long teamId, Long researchId) {
@@ -44,21 +36,5 @@ public class TeamConductsResearch {
 
     public void setResearchId(Long researchId) {
         this.researchId = researchId;
-    }
-
-    public ResearchTeam getTeam() {
-        return team;
-    }
-
-    public void setTeam(ResearchTeam team) {
-        this.team = team;
-    }
-
-    public Research getResearch() {
-        return research;
-    }
-
-    public void setResearch(Research research) {
-        this.research = research;
     }
 }
